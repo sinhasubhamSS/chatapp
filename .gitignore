@@ -1,0 +1,47 @@
+# Node modules
+backend/node_modules/
+chatappf/node_modules/
+
+# Build output
+backend/dist/
+chatappf/dist/
+chatappf/build/
+
+# Logs
+backend/logs/
+chatappf/logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+backend/.env
+chatappf/.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor folders and settings
+.vscode/
+.idea/
+
+# Coverage reports (if using testing tools)
+coverage/
+
+# Local database (optional if using MongoDB locally)
+data/
+data/db/
+
+# File uploads or temporary files (optional)
+uploads/
+temp/
+
+# Optional: Next.js or React cache (if used at any point)
+.next/
+.cache/
+
+# Optional: Windows + Mac system files
+ehthumbs.db
+desktop.ini
