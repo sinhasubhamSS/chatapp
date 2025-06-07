@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: "https://chatapp-lyart-three-56.vercel.app/", // or your frontend URL on Render
+    origin: "https://chatapp-lyart-three-56.vercel.app", 
     credentials: true,
 }));
 

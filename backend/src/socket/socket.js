@@ -8,7 +8,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "https://chatapp-lyart-three-56.vercel.app/", // or your frontend URL on Render
+        origin: "https://chatapp-lyart-three-56.vercel.app", // or your frontend URL on Render
         methods: ["GET", "POST"],
         credentials: true,
     },
