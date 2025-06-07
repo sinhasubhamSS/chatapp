@@ -9,10 +9,15 @@ import io from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux'
 import { setSocket } from './redux/socketSlice'
 import { setonlineUsers } from './redux/userSlice'
+import ProtectedRoute from './components/Protectedroutes'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />
+    element: (
+      <ProtectedRoute>
+        <HomePage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/register",
@@ -27,8 +32,8 @@ const router = createBrowserRouter([
 function App() {
 
   const { authUser } = useSelector(store => store.user)
-  const{socket}=useSelector(store=>store.socket)
-  const API=import.meta.env.VITE_BACKEND_SOCKET
+  const { socket } = useSelector(store => store.socket)
+  const API = import.meta.env.VITE_BACKEND_SOCKET
   const dispatch = useDispatch();
   useEffect(() => {
     if (authUser) {
@@ -40,15 +45,14 @@ function App() {
       socket.on('getOnlineUsers', (onlineusers) => {
         dispatch(setonlineUsers(onlineusers))
       });
-      return ()=>socket.close();
-    }else{
-      if(socket)
-      {
+      return () => socket.close();
+    } else {
+      if (socket) {
         socket.close();
         dispatch(setSocket(null))
       }
     }
-  }, [authUser,dispatch]);
+  }, [authUser, dispatch]);
 
 
 
