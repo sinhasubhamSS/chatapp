@@ -1,5 +1,5 @@
 import React from 'react'
-import Messagecontainers from './Messagecontainers'
+import Messagecontainers from './MessageContainers'
 import Sidebar from "./SideBar"
 function HomePage() {
   return (
