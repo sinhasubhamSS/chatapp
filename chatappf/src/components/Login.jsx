@@ -11,10 +11,11 @@ function Login() {
         username: "",
         password: ""
     })
+    const API = import.meta.env.VITE_BACKEND_URL;
     const onSubmitHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`http://localhost:8080/api/v1/user/login`, user, {
+            const res = await axios.post(`${API}/user/login`, user, {
                 headers: {
                     "Content-Type": "application/json"
 

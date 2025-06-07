@@ -28,10 +28,11 @@ function App() {
 
   const { authUser } = useSelector(store => store.user)
   const{socket}=useSelector(store=>store.socket)
+  const API=import.meta.env.VITE_BACKEND_SOCKET
   const dispatch = useDispatch();
   useEffect(() => {
     if (authUser) {
-      const socket = io('http://localhost:8080', {
+      const socket = io(`${API}`, {
         query: { userId: authUser?._id },
         transports: ['websocket'], // optional, specify transport protocols
       });

@@ -11,10 +11,11 @@ function SendInput() {
    
     const { selectedUser } = useSelector(store => store.user)
     const { messages } = useSelector(store => store.message)
+      const API = import.meta.env.VITE_BACKEND_URL;
     const onSubmitHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`http://localhost:8080/api/v1/message//send/${selectedUser?._id}`, { message }, {
+            const res = await axios.post(`${API}/message//send/${selectedUser?._id}`, { message }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }, withCredentials: true

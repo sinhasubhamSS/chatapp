@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setMessages } from '../redux/messageSlice'
 const useGetMessages = () => {
     const { selectedUser } = useSelector(store => store.user)
+      const API = import.meta.env.VITE_BACKEND_URL;
     const dispatch=useDispatch()
     useEffect(() => {
        
@@ -11,7 +12,7 @@ const useGetMessages = () => {
             
             try {
                 axios.defaults.withCredentials = true;
-                const res = await axios.get(`http://localhost:8080/api/v1/message/${selectedUser?._id}`);
+                const res = await axios.get(`${API}/message/${selectedUser?._id}`);
                 
                 dispatch(setMessages(res.data))
             

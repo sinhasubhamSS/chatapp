@@ -16,7 +16,7 @@ function SideBar() {
 
   const fullUserList = useRef(otherUsers)
   const [filteredOtherUsers, setFilteredOtherUsers] = useState(otherUsers);
-
+  const API = import.meta.env.VITE_BACKEND_URL;
 
   //ref to store the full list of user
 
@@ -27,7 +27,7 @@ function SideBar() {
   }, [otherUsers])
   const logoutHandler = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/api/v1/user/logout`)
+      const res = await axios.get(`${API}/user/logout`)
       dispatch(setAuthUser(null))
       navigate("/Login")
       toast.success(res.data.message)

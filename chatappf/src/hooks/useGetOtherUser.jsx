@@ -5,13 +5,13 @@ import { setOtherUsers } from "../redux/userSlice";
 import { debounce } from 'lodash';
 const useGetOtherUsers = () => {
     const dispatch = useDispatch()
-
+  const API = import.meta.env.VITE_BACKEND_URL;
     useEffect(() => {
         const fetchOtherUsers = async () => {
             try {
                 axios.defaults.withCredentials = true;
 
-                const res = await axios.get(`http://localhost:8080/api/v1/user/`)
+                const res = await axios.get(`${API}/user/`)
                 //console.log(res); now instead of printing store in store so anyone can access it.
                 //sending all other user data to store
 
@@ -29,35 +29,3 @@ const useGetOtherUsers = () => {
 }
 export default useGetOtherUsers
 
-// import { useEffect } from 'react';
-// import axios from "axios";
-// import { useDispatch } from 'react-redux';
-// import { setOtherUsers } from '../redux/userSlice';
-// import { debounce } from 'lodash';
-
-// const useGetOtherUsers = () => {
-//     const dispatch = useDispatch();
-
-//     // Define the debounced function outside of useEffect
-//     const fetchOtherUsers = debounce(async () => {
-//         try {
-//             axios.defaults.withCredentials = true;
-//             const res = await axios.get(`http://localhost:8080/api/v1/user/`);
-//             dispatch(setOtherUsers(res.data));
-//         } catch (error) {
-//             console.log(`Error fetching other users: ${error}`);
-//         }
-//     }, 300); // Adjust the debounce delay as needed
-
-//     useEffect(() => {
-//         fetchOtherUsers(); // Call the debounced function
-
-//         // Cleanup function to cancel any pending debounced calls if component unmounts
-//         return () => {
-//             fetchOtherUsers.cancel();
-//         };
-//     }, [dispatch]); // Dependency array to include dispatch
-
-// };
-
-// export default useGetOtherUsers;

@@ -3,7 +3,8 @@ import io from 'socket.io-client';
 
 // Function to initialize and return a socket connection
 export const connectSocket = (userId, onOnlineUsers) => {
-  const socket = io('http://localhost:8080', {
+  const API=import.meta.env.VITE_BACKEND_SOCKET
+  const socket = io(`${API}`, {
     query: { userId },
     transports: ['websocket'],
   });
