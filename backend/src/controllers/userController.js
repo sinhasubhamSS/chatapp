@@ -65,12 +65,21 @@ export const loginUser = async (req, res) => {
                 process.env.JWT_SECRET_KEY,
                 { expiresIn: process.env.ACCESS_TOKEN_EXPIRY });
         //now we have to store token at browser cookie
-        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: "strict" }).json({
-            _id: user._id,
-            username: user.username,
-            fullname: user.fullname,
-            profilePhoto: user.profilePhoto
-        })
+        return res
+            .status(200)
+            .cookie("token", token, {
+                maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
+                httpOnly: true,
+                secure: true,           // Must be true for HTTPS (Render uses HTTPS)
+                sameSite: "none",       // Must be 'none' for cross-origin cookies
+            })
+            .json({
+                _id: user._id,
+                username: user.username,
+                fullname: user.fullname,
+                profilePhoto: user.profilePhoto,
+            });
+
 
 
 
@@ -82,26 +91,32 @@ export const loginUser = async (req, res) => {
 
 export const logoutUser = (req, res) => {
     try {
-        return res.status(200)
-            .cookie("token", "", { maxAge: 0 })
-            .json({
-                message: "Logged out successfully"
-            })
+        return res
+  .status(200)
+  .cookie("token", "", {
+    maxAge: 0,
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  })
+  .json({
+    message: "Logged out successfully",
+  });
+
 
     } catch (error) {
         console.log(error, "Error at logout catch block");
 
     }
 }
-export const getOtherUser=async (req,res)=>{
+export const getOtherUser = async (req, res) => {
     try {
-        const loggedInUserId=req.id;
-        const otherUsers= await User.find({_id:{$ne:loggedInUserId}}).select("-password")
+        const loggedInUserId = req.id;
+        const otherUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password")
         return res.status(200).json(otherUsers);
-        
-    } catch (error) 
-    {
-        console.log(error,"Error at get other user");
-        
+
+    } catch (error) {
+        console.log(error, "Error at get other user");
+
     }
 }
