@@ -6,10 +6,12 @@ import cookieParser from "cookie-parser";
 import messageRoute from "./src/routes/messageRoute.js"
 import { urlencoded } from "express";
 import cors from "cors"
-import { server,app } from "./src/socket/socket.js";
+import { server, app } from "./src/socket/socket.js";
 dotenv.config({})
 const PORT = process.env.PORT || 5000
 //middleware
+console.log("PORT environment variable:", process.env.PORT);
+
 
 app.use(urlencoded({
     extended: true
